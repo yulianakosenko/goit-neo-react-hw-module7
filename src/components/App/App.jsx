@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchContacts } from "../../redux/contactsOps";
+import ContactForm from "../ContactForm/ContactForm";
+import Filter from "../Filter/Filter";
+import ContactList from "../ContactList/ContactList";
+import css from "./App.module.css";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -10,10 +14,11 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <>
-      {/* ContactForm */}
-      {/* Filter */}
-      {/* ContactList */}
-    </>
+    <div className={css.container}>
+      <h1>Phonebook</h1>
+      <ContactForm />
+      <Filter />
+      <ContactList />
+    </div>
   );
 }
