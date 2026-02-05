@@ -1,65 +1,54 @@
-# goit-neo-react-hw-module7  
-## Contacts Book Application
+# 📇 Contacts Book (Async Redux)
 
-Фінальна домашня робота з курсу  
-**Mastering Front-End Development with React**
+A modern React application for managing personal contacts with full CRUD functionality, asynchronous state management, and a clean, responsive UI.
 
-Модуль 7: **Асинхронний Redux і мемоїзація**
-
----
-
-## 📖 Опис проєкту
-
-Цей проєкт є рефакторингом застосунку **«Книга контактів»**, створеного в попередніх модулях курсу.
-
-У поточній версії:
-- видалено збереження даних у `localStorage`
-- реалізовано взаємодію з бекендом
-- додано асинхронний Redux з використанням Redux Toolkit
-- оптимізовано фільтрацію контактів за допомогою мемоїзації селекторів
+This project is the **final assignment** of the course
+**“Mastering Front-End Development with React”**.
 
 ---
 
-## 🎯 Функціональність
+## 🚀 Live Demo
 
-- Завантаження контактів з бекенду
-- Додавання нового контакту
-- Видалення контакту
-- Фільтрація контактів за ім’ям
-- Відображення станів завантаження та помилок
+👉 **Deployed on Vercel:**
+(https://goit-neo-react-hw-module7-xi-lovat.vercel.app/)
 
 ---
 
-## 🧩 Технології
+## 📂 Repository
 
-- **React 18**
-- **Vite**
-- **Redux Toolkit**
-- **React Redux**
-- **Axios**
-- **CSS Modules**
-- **MockAPI**
+👉 **Source code:**
+(https://github.com/yulianakosenko/goit-neo-react-hw-module7)
 
 ---
 
-## 🌐 Backend
+## 🛠️ Tech Stack
 
-Для зберігання контактів використовується MockAPI.
-
-Endpoint ресурсу:
-```
-
-[https://69833a449c3efeb892a4eb7e.mockapi.io/contacts](https://69833a449c3efeb892a4eb7e.mockapi.io/contacts)
-
-````
-
-Бекенд автоматично генерує унікальні `id` для кожного контакту.
+* **React** (Vite)
+* **Redux Toolkit**
+* **Redux Async Thunks**
+* **Axios**
+* **MockAPI** (REST backend)
+* **CSS Modules**
+* **JavaScript (ES6+)**
 
 ---
 
-## 🗂️ Архітектура стану (Redux)
+## ✨ Features
 
-### Структура глобального стану:
+* 📥 Fetch contacts from a remote API
+* ➕ Add new contacts
+* ❌ Delete existing contacts
+* 🔍 Filter contacts by name
+* ⏳ Loading state handling
+* ⚠️ Error handling for HTTP requests
+* 🌙 Light / Dark theme toggle
+* ⚡ Optimized selectors with memoization (`createSelector`)
+
+---
+
+## 🧠 Architecture Overview
+
+### State Structure
 
 ```js
 {
@@ -72,151 +61,111 @@ Endpoint ресурсу:
     name: ""
   }
 }
-````
+```
+
+### Key Concepts Used
+
+* `createAsyncThunk` for async operations
+* `extraReducers` for handling async lifecycle (`pending / fulfilled / rejected`)
+* Memoized selector with `createSelector` to prevent unnecessary re-renders
+* Separation of concerns between UI components and Redux logic
 
 ---
 
-## 🔄 Асинхронні операції
+## 🔗 Backend
 
-Асинхронна логіка реалізована у файлі `contactsOps.js` за допомогою `createAsyncThunk`.
+The application uses a custom REST API created with **MockAPI**.
 
-### Реалізовані операції:
+**Base endpoint:**
 
-* `fetchContacts` — отримання списку контактів (GET)
-* `addContact` — додавання нового контакту (POST)
-* `deleteContact` — видалення контакту за ID (DELETE)
+```
+https://69833a449c3efeb892a4eb7e.mockapi.io/contacts
+```
 
-Для обробки помилок використовується `thunkAPI.rejectWithValue`.
-
----
-
-## 🧠 Селектори та мемоїзація
-
-У застосунку використовуються селектори для доступу до стану Redux:
-
-### Contacts slice:
-
-* `selectContacts`
-* `selectLoading`
-* `selectError`
-
-### Filters slice:
-
-* `selectNameFilter`
-
-### Мемоізований селектор:
-
-* `selectFilteredContacts`
-
-Селектор `selectFilteredContacts` створений за допомогою `createSelector`
-і перераховується **лише при зміні списку контактів або значення фільтра**.
+The backend automatically generates unique IDs for contacts.
 
 ---
 
-## 📁 Структура проєкту
+## 📁 Project Structure
 
 ```
 src/
 ├── components/
 │   ├── App/
-│   │   ├── App.jsx
-│   │   └── App.module.css
+│   ├── Contact/
 │   ├── ContactForm/
-│   │   ├── ContactForm.jsx
-│   │   └── ContactForm.module.css
 │   ├── ContactList/
-│   │   ├── ContactList.jsx
-│   │   └── ContactList.module.css
-│   ├── ContactItem/
-│   │   ├── ContactItem.jsx
-│   │   └── ContactItem.module.css
 │   └── Filter/
-│       ├── Filter.jsx
-│       └── Filter.module.css
-│
 ├── redux/
 │   ├── store.js
 │   ├── contactsSlice.js
 │   ├── contactsOps.js
 │   └── filtersSlice.js
-│
 ├── main.jsx
-└── index.css
 ```
 
-Кожен компонент:
+Each component is placed in a separate folder and includes:
 
-* знаходиться в окремій папці
-* має власний JSX-файл
-* стилізується за допомогою CSS Modules
-* експортується через `export default`
+* JSX file
+* CSS Module file
 
 ---
 
-## ▶️ Запуск проєкту локально
+## ⚙️ Installation & Setup
 
-1. Клонувати репозиторій:
-
-```bash
-git clone <repository-url>
-```
-
-2. Перейти в папку проєкту:
+Clone the repository:
 
 ```bash
+git clone https://github.com/yulianakosenko/goit-neo-react-hw-module7
 cd goit-neo-react-hw-module7
 ```
 
-3. Встановити залежності:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-4. Запустити проєкт:
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-Застосунок буде доступний за адресою:
+Build for production:
 
+```bash
+npm run build
 ```
-https://goit-neo-react-hw-module7-xi-lovat.vercel.app/
-```
 
 ---
 
-## 🚀 Деплой
+## ✅ Requirements Compliance
 
-Проєкт задеплоєний на платформі **Vercel**.
-
-Налаштування:
-
-* Framework: **Vite**
-* Build command: `npm run build`
-* Output directory: `dist`
-* Node.js version: **18.x**
-
----
-
-## ✅ Відповідність вимогам завдання
-
-* ✔️ Проєкт створено за допомогою Vite
-* ✔️ Використано Redux Toolkit
-* ✔️ Реалізовано асинхронні операції
-* ✔️ Відсутній Redux Persist
-* ✔️ CSS Modules для стилізації
-* ✔️ Мемоізовані селектори
-* ✔️ Компоненти без зайвих props
-* ✔️ Відсутні помилки та попередження в консолі
+* ✔️ Created with **Vite**
+* ✔️ Uses **Redux Toolkit**
+* ✔️ Uses **async thunks**
+* ✔️ No Redux Persist
+* ✔️ CSS Modules only
+* ✔️ No console errors or warnings
+* ✔️ Clean and readable code structure
+* ✔️ Memoized selectors implemented
 
 ---
 
-## 👤 Автор
+## 📌 Notes
 
-Фінальна домашня робота
-студентки курсу **GoIT Neoversity**
+This project focuses on:
 
-````
+* correct Redux async architecture
+* performance optimization
+* clean UI structure
+* maintainable and scalable code
+
+---
+
+## 👩‍💻 Author
+
+**Yuliya Kostenko**
+Frontend Developer
 
