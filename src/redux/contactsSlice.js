@@ -2,6 +2,7 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./contactsOps";
 import { selectNameFilter } from "./filtersSlice";
 
+
 const initialState = {
   items: [],
   loading: false,
@@ -11,8 +12,10 @@ const initialState = {
 const contactsSlice = createSlice({
   name: "contacts",
   initialState,
+  reducers: {}, // ❗ немає звичайних редюсерів
   extraReducers: (builder) => {
     builder
+      // ===== FETCH CONTACTS =====
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -25,8 +28,11 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      // ===== ADD CONTACT =====
       .addCase(addContact.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
@@ -36,8 +42,11 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      // ===== DELETE CONTACT =====
       .addCase(deleteContact.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
@@ -54,14 +63,20 @@ const contactsSlice = createSlice({
 
 export const contactsReducer = contactsSlice.reducer;
 
+//
+// ===== БАЗОВІ СЕЛЕКТОРИ =====
+//
 export const selectContacts = (state) => state.contacts.items;
 export const selectLoading = (state) => state.contacts.loading;
 export const selectError = (state) => state.contacts.error;
 
+//
+// ===== МЕМОІЗОВАНИЙ СЕЛЕКТОР =====
+//
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter],
-  (contacts, filter) =>
+  (contacts, nameFilter) =>
     contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()),
+      contact.name.toLowerCase().includes(nameFilter.toLowerCase()),
     ),
 );

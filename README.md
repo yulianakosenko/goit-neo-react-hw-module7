@@ -1,16 +1,222 @@
-# React + Vite
+# goit-neo-react-hw-module7  
+## Contacts Book Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Фінальна домашня робота з курсу  
+**Mastering Front-End Development with React**
 
-Currently, two official plugins are available:
+Модуль 7: **Асинхронний Redux і мемоїзація**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📖 Опис проєкту
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Цей проєкт є рефакторингом застосунку **«Книга контактів»**, створеного в попередніх модулях курсу.
 
-## Expanding the ESLint configuration
+У поточній версії:
+- видалено збереження даних у `localStorage`
+- реалізовано взаємодію з бекендом
+- додано асинхронний Redux з використанням Redux Toolkit
+- оптимізовано фільтрацію контактів за допомогою мемоїзації селекторів
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🎯 Функціональність
+
+- Завантаження контактів з бекенду
+- Додавання нового контакту
+- Видалення контакту
+- Фільтрація контактів за ім’ям
+- Відображення станів завантаження та помилок
+
+---
+
+## 🧩 Технології
+
+- **React 18**
+- **Vite**
+- **Redux Toolkit**
+- **React Redux**
+- **Axios**
+- **CSS Modules**
+- **MockAPI**
+
+---
+
+## 🌐 Backend
+
+Для зберігання контактів використовується MockAPI.
+
+Endpoint ресурсу:
+```
+
+[https://69833a449c3efeb892a4eb7e.mockapi.io/contacts](https://69833a449c3efeb892a4eb7e.mockapi.io/contacts)
+
+````
+
+Бекенд автоматично генерує унікальні `id` для кожного контакту.
+
+---
+
+## 🗂️ Архітектура стану (Redux)
+
+### Структура глобального стану:
+
+```js
+{
+  contacts: {
+    items: [],
+    loading: false,
+    error: null
+  },
+  filters: {
+    name: ""
+  }
+}
+````
+
+---
+
+## 🔄 Асинхронні операції
+
+Асинхронна логіка реалізована у файлі `contactsOps.js` за допомогою `createAsyncThunk`.
+
+### Реалізовані операції:
+
+* `fetchContacts` — отримання списку контактів (GET)
+* `addContact` — додавання нового контакту (POST)
+* `deleteContact` — видалення контакту за ID (DELETE)
+
+Для обробки помилок використовується `thunkAPI.rejectWithValue`.
+
+---
+
+## 🧠 Селектори та мемоїзація
+
+У застосунку використовуються селектори для доступу до стану Redux:
+
+### Contacts slice:
+
+* `selectContacts`
+* `selectLoading`
+* `selectError`
+
+### Filters slice:
+
+* `selectNameFilter`
+
+### Мемоізований селектор:
+
+* `selectFilteredContacts`
+
+Селектор `selectFilteredContacts` створений за допомогою `createSelector`
+і перераховується **лише при зміні списку контактів або значення фільтра**.
+
+---
+
+## 📁 Структура проєкту
+
+```
+src/
+├── components/
+│   ├── App/
+│   │   ├── App.jsx
+│   │   └── App.module.css
+│   ├── ContactForm/
+│   │   ├── ContactForm.jsx
+│   │   └── ContactForm.module.css
+│   ├── ContactList/
+│   │   ├── ContactList.jsx
+│   │   └── ContactList.module.css
+│   ├── ContactItem/
+│   │   ├── ContactItem.jsx
+│   │   └── ContactItem.module.css
+│   └── Filter/
+│       ├── Filter.jsx
+│       └── Filter.module.css
+│
+├── redux/
+│   ├── store.js
+│   ├── contactsSlice.js
+│   ├── contactsOps.js
+│   └── filtersSlice.js
+│
+├── main.jsx
+└── index.css
+```
+
+Кожен компонент:
+
+* знаходиться в окремій папці
+* має власний JSX-файл
+* стилізується за допомогою CSS Modules
+* експортується через `export default`
+
+---
+
+## ▶️ Запуск проєкту локально
+
+1. Клонувати репозиторій:
+
+```bash
+git clone <repository-url>
+```
+
+2. Перейти в папку проєкту:
+
+```bash
+cd goit-neo-react-hw-module7
+```
+
+3. Встановити залежності:
+
+```bash
+npm install
+```
+
+4. Запустити проєкт:
+
+```bash
+npm run dev
+```
+
+Застосунок буде доступний за адресою:
+
+```
+https://goit-neo-react-hw-module7-xi-lovat.vercel.app/
+```
+
+---
+
+## 🚀 Деплой
+
+Проєкт задеплоєний на платформі **Vercel**.
+
+Налаштування:
+
+* Framework: **Vite**
+* Build command: `npm run build`
+* Output directory: `dist`
+* Node.js version: **18.x**
+
+---
+
+## ✅ Відповідність вимогам завдання
+
+* ✔️ Проєкт створено за допомогою Vite
+* ✔️ Використано Redux Toolkit
+* ✔️ Реалізовано асинхронні операції
+* ✔️ Відсутній Redux Persist
+* ✔️ CSS Modules для стилізації
+* ✔️ Мемоізовані селектори
+* ✔️ Компоненти без зайвих props
+* ✔️ Відсутні помилки та попередження в консолі
+
+---
+
+## 👤 Автор
+
+Фінальна домашня робота
+студентки курсу **GoIT Neoversity**
+
+````
+

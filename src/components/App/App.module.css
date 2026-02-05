@@ -1,5 +1,87 @@
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+.page {
+  min-height: 100vh;
+  background-color: #fafafa;
+  padding: 48px 16px;
 }
+
+.card {
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: #fefefe;
+  border-radius: 14px;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+}
+
+/* 🔹 HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 12px 0 20px;
+}
+
+/* 🔘 КНОПКА ПЕРЕМИКАЧА ТЕМИ */
+.themeToggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: #e5e7eb;
+}
+
+/* 🌙 DARK MODE — глобально через data-theme */
+:global(body[data-theme="dark"]) {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+:global(body[data-theme="dark"]) .page {
+  background: linear-gradient(135deg, #020617, #020617);
+}
+
+:global(body[data-theme="dark"]) .card {
+  background-color: #020617;
+  color: #e5e7eb;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+:global(body[data-theme="dark"]) .title {
+  color: #e5e7eb;
+}
+
+:global(body[data-theme="dark"]) .subtitle {
+  color: #94a3b8;
+}
+
+:global(body[data-theme="dark"]) .themeToggle {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+:global(body[data-theme="dark"]) .themeToggle:hover {
+  background-color: #1e293b;
+}
+
